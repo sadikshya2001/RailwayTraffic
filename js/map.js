@@ -4,21 +4,17 @@ let trainMarkers = {};
 let selectedTrain = null;
 
 function initMap() {
-  // Initialize map centered on Finland
   map = L.map("map").setView([62.2426, 25.7473], 6);
 
-  // Add OpenStreetMap tiles
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(map);
 
-  // Add scale control
   L.control.scale().addTo(map);
 }
 
 function createTrainIcon(trainType) {
-  // Different icons for different train types
   const iconColor =
     trainType === "LONG_DISTANCE"
       ? "red"
@@ -34,7 +30,6 @@ function createTrainIcon(trainType) {
 }
 
 function updateTrainPositions(trains) {
-  // Update existing markers and add new ones
   const activeTrainIds = new Set();
 
   trains.forEach((train) => {
@@ -44,13 +39,11 @@ function updateTrainPositions(trains) {
     const position = [
       train.location.coordinates[1],
       train.location.coordinates[0],
-    ]; // Convert from [lon, lat] to [lat, lon]
+    ];
 
     if (marker) {
-      // Update existing marker
       marker.setLatLng(position);
     } else {
-      // Create new marker
       const trainIcon = createTrainIcon(train.trainType);
       const newMarker = L.marker(position, { icon: trainIcon })
         .addTo(map)
@@ -60,7 +53,6 @@ function updateTrainPositions(trains) {
     }
   });
 
-  // Remove markers for trains that are no longer active
   Object.keys(trainMarkers).forEach((trainId) => {
     if (!activeTrainIds.has(trainId)) {
       map.removeLayer(trainMarkers[trainId]);
@@ -80,7 +72,6 @@ function showTrainDetails(train) {
     detailsHTML += `<p><strong>Type:</strong> ${train.trainType}</p>`;
   }
 
-  // Only add category if it's defined
   if (train.trainCategory && train.trainCategory !== "undefined") {
     detailsHTML += `<p><strong>Category:</strong> ${train.trainCategory}</p>`;
   }
