@@ -10,7 +10,6 @@ A real-time web application that displays the locations of trains across Finland
 
 - Real-time tracking of trains across Finland
 - Automatic updates every 5 seconds
-- Color-coded train markers (red for long-distance, blue for commuter, green for others)
 - Detailed information panel showing train specifics when selected
 - Responsive design that works on desktop and mobile devices
 - Connection status indicator
