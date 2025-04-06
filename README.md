@@ -27,7 +27,6 @@ A real-time web application that displays the locations of trains across Finland
 ### Prerequisites
 
 - A modern web browser
-- A local web server for testing (optional)
 
 ### Installation
 
