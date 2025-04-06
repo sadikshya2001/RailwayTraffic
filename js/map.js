@@ -73,17 +73,27 @@ function showTrainDetails(train) {
   selectedTrain = train;
 
   const detailsDiv = document.getElementById("train-details");
-  detailsDiv.innerHTML = `
-        <h3>Train ${train.trainNumber}</h3>
-        <p><strong>Type:</strong> ${train.trainType}</p>
-        <p><strong>Category:</strong> ${train.trainCategory}</p>
-        <p><strong>Speed:</strong> ${train.speed} km/h</p>
-        <p><strong>Last updated:</strong> ${new Date(
-          train.timestamp
-        ).toLocaleString()}</p>
-    `;
 
-  // Highlight the selected train
+  let detailsHTML = `<h3>Train ${train.trainNumber}</h3>`;
+
+  if (train.trainType && train.trainType !== "undefined") {
+    detailsHTML += `<p><strong>Type:</strong> ${train.trainType}</p>`;
+  }
+
+  // Only add category if it's defined
+  if (train.trainCategory && train.trainCategory !== "undefined") {
+    detailsHTML += `<p><strong>Category:</strong> ${train.trainCategory}</p>`;
+  }
+
+  detailsHTML += `
+    <p><strong>Speed:</strong> ${train.speed} km/h</p>
+    <p><strong>Last updated:</strong> ${new Date(
+      train.timestamp
+    ).toLocaleString()}</p>
+  `;
+
+  detailsDiv.innerHTML = detailsHTML;
+
   Object.values(trainMarkers).forEach((marker) => {
     marker._icon.classList.remove("selected");
   });
